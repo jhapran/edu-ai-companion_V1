@@ -170,7 +170,7 @@ export default function DashboardLayout({ onAIChatToggle }: DashboardLayoutProps
       </header>
 
       {/* Sidebar */}
-      <aside className={`fixed left-0 top-0 mt-16 h-full bg-white shadow-sm transition-all duration-300 overflow-hidden ${sidebarOpen ? 'w-64' : 'w-20'}`}>
+      <aside className={`fixed left-0 top-0 mt-16 h-[calc(100vh-4rem)] bg-white shadow-sm transition-all duration-300 overflow-y-auto ${sidebarOpen ? 'w-64' : 'w-20'}`}>
         <nav className="p-4 space-y-6">
           {menuItems.map((section, index) => (
             <div key={index} className="space-y-2">
