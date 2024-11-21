@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Outlet, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Outlet } from 'react-router-dom';
 import { 
   Menu, 
   Bell, 
@@ -15,6 +15,14 @@ import {
   BarChart,
   Users,
   FileBarChart,
+  UserCircle,
+  School,
+  BookOpenCheck,
+  Calendar,
+  MessageSquare,
+  Trophy,
+  ClipboardList,
+  Target
 } from 'lucide-react';
 
 interface DashboardLayoutProps {
@@ -23,10 +31,11 @@ interface DashboardLayoutProps {
 
 export default function DashboardLayout({ onAIChatToggle }: DashboardLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [userRole, setUserRole] = useState<'teacher' | 'student'>('teacher');
   const navigate = useNavigate();
   const location = useLocation();
 
-  const menuItems = [
+  const teacherMenuItems = [
     {
       title: 'Main',
       items: [
@@ -53,6 +62,33 @@ export default function DashboardLayout({ onAIChatToggle }: DashboardLayoutProps
     },
   ];
 
+  const studentMenuItems = [
+    {
+      title: 'Main',
+      items: [
+        { label: 'Dashboard', path: '/student', icon: <LayoutDashboard size={20} /> },
+      ],
+    },
+    {
+      title: 'Learning',
+      items: [
+        { label: 'My Courses', path: '/student/courses', icon: <BookOpenCheck size={20} /> },
+        { label: 'Assignments', path: '/student/assignments', icon: <ClipboardList size={20} /> },
+        { label: 'Schedule', path: '/student/schedule', icon: <Calendar size={20} /> },
+      ],
+    },
+    {
+      title: 'Engagement',
+      items: [
+        { label: 'Discussion Forum', path: '/student/forum', icon: <MessageSquare size={20} /> },
+        { label: 'Progress Tracking', path: '/student/progress', icon: <Target size={20} /> },
+        { label: 'Achievements', path: '/student/achievements', icon: <Trophy size={20} /> },
+      ],
+    },
+  ];
+
+  const menuItems = userRole === 'teacher' ? teacherMenuItems : studentMenuItems;
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Top Navigation */}
@@ -72,9 +108,28 @@ export default function DashboardLayout({ onAIChatToggle }: DashboardLayoutProps
                   EduQuery
                 </h1>
               </div>
-              <span className="ml-2 px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded-full font-medium">
-                Teacher
-              </span>
+              <div className="ml-4 flex gap-2">
+                <button
+                  onClick={() => setUserRole('teacher')}
+                  className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+                    userRole === 'teacher' 
+                      ? 'bg-blue-100 text-blue-800' 
+                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  }`}
+                >
+                  Teacher
+                </button>
+                <button
+                  onClick={() => setUserRole('student')}
+                  className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+                    userRole === 'student' 
+                      ? 'bg-green-100 text-green-800' 
+                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  }`}
+                >
+                  Student
+                </button>
+              </div>
             </div>
           </div>
           
