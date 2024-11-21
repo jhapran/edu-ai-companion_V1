@@ -93,7 +93,7 @@ export default function DashboardLayout({ onAIChatToggle }: DashboardLayoutProps
     <div className="min-h-screen bg-gray-50">
       {/* Top Navigation */}
       <header className="bg-white shadow-sm fixed w-full z-10">
-        <div className="flex items-center justify-between px-4 py-3">
+        <div className="flex items-center justify-between px-4 py-4">
           <div className="flex items-center gap-3">
             <button 
               onClick={() => setSidebarOpen(!sidebarOpen)} 
@@ -170,7 +170,7 @@ export default function DashboardLayout({ onAIChatToggle }: DashboardLayoutProps
       </header>
 
       {/* Sidebar */}
-      <aside className={`fixed left-0 top-0 mt-16 h-[calc(100vh-4rem)] bg-white shadow-sm transition-all duration-300 overflow-y-auto ${sidebarOpen ? 'w-64' : 'w-20'}`}>
+      <aside className={`fixed left-0 top-0 mt-20 h-[calc(100vh-5rem)] bg-white shadow-sm transition-all duration-300 overflow-y-auto ${sidebarOpen ? 'w-64' : 'w-20'}`}>
         <nav className="p-4 space-y-6">
           {menuItems.map((section, index) => (
             <div key={index} className="space-y-2">
@@ -201,7 +201,7 @@ export default function DashboardLayout({ onAIChatToggle }: DashboardLayoutProps
       </aside>
 
       {/* Main Content */}
-      <main className={`pt-16 ${sidebarOpen ? 'ml-64' : 'ml-20'} transition-all duration-300 p-6`}>
+      <main className={`pt-20 ${sidebarOpen ? 'ml-64' : 'ml-20'} transition-all duration-300 p-6`}>
         <Outlet />
       </main>
     </div>
